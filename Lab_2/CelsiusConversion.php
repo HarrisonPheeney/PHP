@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <title>Lab 2</title>
     <style type="text/css">
-        table, td, th, tr {
+        table, td, th {
             border: 1px solid black;
-
         }
 
         tr:nth-child(even) {
@@ -16,16 +15,14 @@
         th{
             background-color: gray;
         }
-
     </style>
-
 
 
 </head>
 
 <body>
 
-<a href="CelsiusConversion.php">Click here to go to Celsius Conversions</a>
+<a href="FahrenheitConversion.php"> Click here to go see Fahrenheit conversions</a>
 
 
 </body>
@@ -33,18 +30,19 @@
 <table>
     <thead>
     <tr>
-        <th>Fahrenheit</th>
         <th>Celsius</th>
+        <th>Fahrenheit</th>
     </tr>
     </thead>
     <tbody>
     <?php
     for ($x =0; $x <= 100; $x++):
-        $Celsius = ($x - 32) * .56;
+        $Fahrenheit = ($x * 1.8) +32;
+        $Fahrenheit = round($Fahrenheit);
         ?>
         <tr>
             <td><?php echo $x; ?></td>
-            <td><?php echo round($Celsius); ?></td>
+            <td><?php echo $Fahrenheit; ?></td>
         </tr>
     <?php
     endfor;
