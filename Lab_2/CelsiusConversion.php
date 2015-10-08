@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Lab 2</title>
+    <title>Lab 22</title>
     <style type="text/css">
         table, td, th {
             border: 1px solid black;
