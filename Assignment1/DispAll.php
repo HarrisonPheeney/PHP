@@ -11,6 +11,7 @@
 </head>
 
 
+<body>
 <table>
     <thead>
     <tr>
@@ -18,31 +19,35 @@
         <th>Birth Date</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Gender </th>
+        <th>Gender</th>
         <th>Hire Date</th>
+
     </tr>
     </thead>
     <tbody>
-    <body>
+
 
     <?php
-
-    include("DBCreator.php");
+    include ("ConnectToDB.php");
     $db = connectToDB();
 
-    if (!$db)
-    {
-        die('Could not connect to the Employees Database: ' . mysqli_error($db));
+
+
+    if(!isset($_POST['currIndex'])) {
+        $_POST['currIndex'] = 0;
+
+        $currentIndex = 0;
+        /*if (!$newActor) {
+            die("Couldn't inset actor" . mysqli_error($db));
+        }*/
+
     }
 
-    $serach = $_POST['sTerm'];
-    $result = mysqli_query($db, "SELECT * FROM employees;" );
-    //$result = mysqli_query($db, "SELECT * FROM film WHERE description LIKE '%boring%' LIMIT 0,10");
+    $currentIndex = $_POST['currIndex'];
 
-    if(!$result)
-    {
-        die('Could not retrieve records from the Employees Database: ' . mysqli_error($db));
-    }
+    $result = mysqli_query($db, "SELECT * FROM employees  Limit $currentIndex,25 ");
+
+
     while ($row = mysqli_fetch_assoc($result))
     {
         echo "<tr>";
@@ -54,14 +59,34 @@
         echo "<td>" . $row['hire_date'] . "</td>";
         //echo $row['title'] . " " . $row['description'];
         echo "</tr>";
+
+
     }
 
-    $db = closeDb();
 
+    closeDb();
+
+    $currentIndex += 25;
     ?>
 
-    </tbody>
+
+
+
+
+</tbody>
 </table>
+
+<form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> method="post">
+
+    <input type="hidden" name="currIndex" value="<?php echo $currentIndex; ?>"
+    <input type="submit" value="<">
+    <input type="submit" value=">">
+</form>
+
+
+
+
+
 
 
 </body>
